@@ -1,7 +1,7 @@
 package Main;
 
 /**
- * Вывод графики на экран (основное меню)
+ * paint start menu
  */
 import javax.swing.*;
 import java.awt.*;

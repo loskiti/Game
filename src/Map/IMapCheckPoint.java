@@ -1,7 +1,7 @@
 package Map;
 
 /**
- * Можно ли пройти по клетке
+ * is move possible on this tile or no
  */
 public interface IMapCheckPoint {
 	boolean check(int x, int y);

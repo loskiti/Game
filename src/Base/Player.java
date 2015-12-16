@@ -1,6 +1,6 @@
 package Base;
 /**
- *Игрок
+ *player
  */
 
 import Paint.BaseActionUnitSprite;

@@ -11,14 +11,14 @@ public abstract class UnitSprite extends Unit {
 	protected int imageX = 0;
 	protected int imageY = 0;
 	/**
-	 * позиции при зацикливании
+	 * position by cycling
 	 */
 	protected int imageMinX = 0;
 	protected int imageMinY = 0;
 	protected int imageMaxX = 0;
 	protected int imageMaxY = 0;
 	/**
-	 * для рисования размеры (для расчета другие)
+	 * size for paint
 	 */
 
 	protected int paintWidth = 100;
@@ -27,11 +27,11 @@ public abstract class UnitSprite extends Unit {
 	@Override
 	public void render(Graphics g) {
 		update();
-		// статическое позиционирование
-		int isoX = posUnitX, isoY = posUnitY;
+		// static position
+		int isoX = posCanvasX, isoY = posCanvasY;
 		if (Game.USE_ISO) {
-			isoX = (posUnitX - posUnitY);
-			isoY = (posUnitX + posUnitY) / 2;
+			isoX = (posCanvasX - posCanvasY);
+			isoY = (posCanvasX + posCanvasY) / 2;
 		}
 
 		g.drawImage(imageUnit, isoX + Game.OFFSET_MAP_X + offsetRenderX, isoY + offsetRenderY,
@@ -42,7 +42,7 @@ public abstract class UnitSprite extends Unit {
 
 	@Override
 	public void update() {
-		// зацикливаем переход по кадрам
+		// cadr cycling
 		imageX++;
 		if (imageX > imageMaxX) {
 			imageX = imageMinX;

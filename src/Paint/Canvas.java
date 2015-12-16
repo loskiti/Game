@@ -1,6 +1,6 @@
 package Paint;
 /**
- * графика
+ * graphic
  */
 
 import java.awt.Color;
@@ -16,13 +16,13 @@ import javax.swing.JPanel;
 public class Canvas extends JPanel {
 
 	/**
-	 * двойня буферизация
+	 * double buffering
 	 */
 	private Image bufer = null;
 	private Color backGround = Color.black;
 
 	/**
-	 * элементы, которые надо добавить на экран
+	 * elements, which we must add to canvas
 	 */
 	private List<IRenderToConvas> renders = new ArrayList<IRenderToConvas>();
 
@@ -35,7 +35,7 @@ public class Canvas extends JPanel {
 	}
 
 	/**
-	 * Сортировка объектов по глубине
+	 * deep sort
 	 */
 	private static Comparator<IRenderToConvas> comparatorDeep = new Comparator<IRenderToConvas>() {
 		@Override
@@ -46,7 +46,7 @@ public class Canvas extends JPanel {
 	};
 
 	/**
-	 * перерисовка карты
+	 * repaint
 	 */
 
 	private void paintWorld(Graphics g) {
@@ -54,7 +54,7 @@ public class Canvas extends JPanel {
 		g.clearRect(0, 0, getWidth(), getHeight());
 		g.setColor(backGround);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		// сортировка перед рисованием
+		// sort before repaint
 		Collections.sort(renders, comparatorDeep);
 		for (IRenderToConvas render : renders) {
 			render.render(g);
@@ -62,7 +62,7 @@ public class Canvas extends JPanel {
 	}
 
 	/**
-	 * двойная буферизация
+	 * double buffering
 	 */
 
 	@Override

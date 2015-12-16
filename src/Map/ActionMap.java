@@ -1,7 +1,7 @@
 package Map;
 
 /**
- * Действия с картой
+ * action with map
  */
 public abstract class ActionMap {
 	protected int map[][];
@@ -15,7 +15,7 @@ public abstract class ActionMap {
 	}
 
 	/**
-	 * Возвращает boolean есть ли ячейка
+	 * is this tile or no
 	 */
 	private boolean isTile(int x, int y) {
 		if ((x >= 0) && (y >= 0) && (y < getHeight()) && (x < getWidth()))
@@ -24,7 +24,7 @@ public abstract class ActionMap {
 	}
 
 	/**
-	 * Возвращает значение ячейки
+	 * get value of the tile
 	 */
 	public int getTile(int x, int y) {
 		if (isTile(x, y))

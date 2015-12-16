@@ -1,7 +1,7 @@
 package Main;
 
 /**
- * Меню при входе
+ * start menu
  */
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

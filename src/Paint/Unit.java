@@ -10,36 +10,32 @@ import Map.MapWay;
 
 public abstract class Unit implements IRenderToConvas {
 
-	/**
-	 * картинка
-	 */
+	
 	protected Image imageUnit;
 	/**
-	 * реальные координаты персонажа
+	 * real position of the player
 	 */
 
-	private int X;
-	private int Y;
+	private int realX;
+	private int realY;
 	protected int layerDeep;
 	/**
-	 * координаты, видимые на экране
+	 * position on the canvas
 	 */
-	protected int posUnitY;
-	protected int posUnitX;
+	protected int posCanvasY;
+	protected int posCanvasX;
 	protected int speed = 5;
 	private int width = 32;
 	private int height = 32;
 	protected int directX = 0;
 	protected int directY = 0;
+	// protected String direct;
 	public MapWay mapway;
 
 	/**
-	 * Отступ при рисовании объекта на карте, что бы он занял середину клетки
+	 * Indent by painting in order to taking place in the middle of the tile
 	 */
 	public int offsetRenderX = 0;
-	/**
-	 * Отступ при рисовании объекта на карте, что бы он занял середину клетки
-	 */
 	public int offsetRenderY = 0;
 
 	public void initiation(String name) {
@@ -51,32 +47,31 @@ public abstract class Unit implements IRenderToConvas {
 
 		update();
 
-		int isoX = posUnitX, isoY = posUnitY;
+		int isoX = posCanvasX, isoY = posCanvasY;
 		if (Game.USE_ISO) {
-			isoX = (posUnitX - posUnitY);
-			isoY = (posUnitX + posUnitY) / 2;
+			isoX = (posCanvasX - posCanvasY);
+			isoY = (posCanvasX + posCanvasY) / 2;
 		}
 		g.drawImage(imageUnit, isoX + offsetRenderX + Game.OFFSET_MAP_X, isoY + offsetRenderY, width, height, null);
 	}
 
 	/**
-	 * определение направления следущий точки (для мышки, на клаве авто, тут в
-	 * зависимости от следущий точки пути до цели)
+	 *  next direction for mouse
 	 */
 
 	public void update() {
 		if (mapway != null && mapway.isNextPoint()) {
 			if (mapway.getP() == null) {
-				mapway.startPoint(X, Y);
+				mapway.startPoint(realX, realY);
 			} else {
 				mapway.nextPoint(speed);
-				if (X != mapway.getP().x) {
-					directX = (X > mapway.getP().x) ? -1 : 1;
+				if (realX != mapway.getP().x) {
+					directX = (realX > mapway.getP().x) ? -1 : 1;
 				} else {
 					directX = 0;
 				}
-				if (Y != mapway.getP().y) {
-					directY = (Y > mapway.getP().y) ? -1 : 1;
+				if (realY != mapway.getP().y) {
+					directY = (realY > mapway.getP().y) ? -1 : 1;
 				} else {
 					directY = 0;
 				}
@@ -94,54 +89,80 @@ public abstract class Unit implements IRenderToConvas {
 	}
 
 	public int getX() {
-		return X;
-	}
-
-	public void setX(int X) {
-		this.X = X;
+		return realX;
 	}
 
 	public int getY() {
-		return Y;
+		return realY;
 	}
 
-	public void setY(int Y) {
-		this.Y = Y;
-	}
-
-	public void setPosUnitY(int posUnitY) {
-		this.posUnitY = posUnitY;
+	public void setPosition(int X, int Y) {
+		this.realY = Y;
+		this.realX = X;
 	}
 
 	public int getPosUnitY() {
-		return posUnitY;
+		return posCanvasY;
 	}
-	public void setPosUnitX(int posUnitX) {
-		this.posUnitX = posUnitX;
+
+	public void setPosUnit(int posUnitX, int posUnitY) {
+		this.posCanvasX = posUnitX;
+		this.posCanvasY = posUnitY;
 	}
 
 	public int getPosUnitX() {
-		return posUnitX;
+		return posCanvasX;
 	}
+
 	public int getSpeed() {
 		return speed;
 	}
+
 	public int getWidth() {
 		return width;
 	}
+
 	public int getHeight() {
 		return height;
 	}
+
 	public int getDirectX() {
 		return directX;
 	}
-	public void setDirectX(int directX ) {
-		this.directX= directX;
-	}
+
+
 	public int getDirectY() {
 		return directY;
 	}
-	public void setDirectY(int directY ) {
-		this.directY= directY;
+
+
+	public void setDirect(String direct) {
+		switch (direct) {
+		case "UP": {
+			this.directY = -1;
+			break;
+		}
+		case "DOWN": {			
+			this.directY = 1;
+			break;
+		}
+		case "RIGHT": {
+			this.directX = 1;
+			break;
+		}
+		case "LEFT": {
+			this.directX = -1;
+			break;
+		}
+		case "Null1": {
+			this.directX = 0;
+			break;			
+		}
+		case "Null2": {
+			this.directY = 0;
+			break;
+		}
+		}
+
 	}
 }

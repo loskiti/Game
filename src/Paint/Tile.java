@@ -1,6 +1,6 @@
 package Paint;
 /**
- * одна плитка карты
+ * one tile
  */
 
 import java.awt.Graphics;
@@ -15,17 +15,17 @@ import Base.Game;
 public class Tile implements IRenderToConvas {
 
 	/**
-	 * размер плитки
+	 * size of the tile
 	 */
 	final public static int SIZE = 40;
 	protected String image;
 	/**
-	 * координаты плитки
+	 * position of the tile
 	 */
 
 	protected int X;
 	/**
-	 * координаты плитки
+	 * position of the tile
 	 */
 	protected int Y;
 	private boolean isPossible;
@@ -67,7 +67,7 @@ public class Tile implements IRenderToConvas {
 	}
 
 	/**
-	 * вернуть изображение по ссылке
+	 * get Image
 	 */
 
 	public static Image getImage(String name) {
@@ -183,17 +183,15 @@ public class Tile implements IRenderToConvas {
 		}
 
 	}*/
-	public void setX(int X) {
-		this.X = X;
-	}
-	public void setY(int Y) {
-		this.Y = Y;
-	}
+	
 	public int getDoor() {
 		return door;
 	}
 	public boolean getIsPossible() {
 		return isPossible;
 	}
-
+	public void setPosition(int X, int Y) {
+		this.X = X;
+		this.Y = Y;
+	}
 }

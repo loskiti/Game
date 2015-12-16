@@ -1,6 +1,6 @@
 package Base;
 /**
- * Воспроизведение музыки
+ * sound
  */
 
 import javax.sound.sampled.*;

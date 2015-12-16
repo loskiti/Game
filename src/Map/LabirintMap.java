@@ -1,19 +1,19 @@
 package Map;
 
 /**
- * ”ровень с лабиринтом
+ * level with  labyrinth
  */
 import java.util.Random;
 
 public class LabirintMap extends ActionMap {
 	public LabirintMap() {
 
-		// генераци€ карты
+		// generation
 		int a = 30, b = 30;
 		Random random = new Random();
 		 map = new int[a][b];
 		 
-		// перва€ строка
+		// 1 line
 		for (int i = 1; i < a; i++) {
 			map[1][i] = i;
 		}
@@ -25,7 +25,7 @@ public class LabirintMap extends ActionMap {
 				i++;
 			}
 		}
-		// со 2 и до предпоследней
+		// 2-last but one line
 		for (int j = 2; j < b - 2; j++) {
 
 			for (int i = 1; i < a; i++) {
@@ -50,7 +50,7 @@ public class LabirintMap extends ActionMap {
 				}
 			}
 		}
-		// последн€€ строка
+		// last line
 		for (int i = 1; i < a; i++) {
 			if (map[b - 1][i] != -1)
 				if (map[b - 2][i] != -1)
@@ -91,7 +91,8 @@ public class LabirintMap extends ActionMap {
 			}
 
 		}*/
-		// контур карты и специальные €чейки
+		// map counter and special tile
+		
 		for (int j = 0; j < a; j++) {
 			for (int i = 0; i < b; i++) {
 				if (((j == 0) || (j == a - 1)) && ((i != 0) && (i != b - 1)))

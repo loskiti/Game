@@ -1,18 +1,12 @@
 package Paint;
-/**
- * гарантия реализации метода обрисовки на холсте
- */
+//paint on canvas
 
 import java.awt.Graphics;
 
 public interface IRenderToConvas {
-
-	void render(Graphics g);
-
-	/**
-	 * глубина позиционирования
-	 */
-
-	int getDeep();
-
-}
+	    
+		void render(Graphics g);
+	    //deep of the positioning
+	    int getDeep();
+	 
+	}

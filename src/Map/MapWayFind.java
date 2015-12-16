@@ -1,6 +1,6 @@
 package Map;
 /**
- * Реализация пузырькового алгоритма поиска пути
+ * bubble sort
  */
 
 import java.awt.Point;
@@ -10,19 +10,19 @@ import Map.WayPoint;
 public class MapWayFind {
 	private MapWay mapway;
 	/**
-	 * можно ли пройти по плитке
+	 * move is possible or no
 	 */
 	private IMapCheckPoint checkPoint;
 	/**
-	 * дошли ли до конца
+	 * is it finish or no
 	 */
 	private boolean isFinish;
 	/**
-	 * потенциально возможные точки пути
+	 *potentially possible point of the way
 	 */
 	private List<WayPoint> nextPoint;
 	/**
-	 * уже найденные точки пути
+	 *  now found points of the way
 	 */
 	private List<WayPoint> backPoint;
 
@@ -30,15 +30,12 @@ public class MapWayFind {
 		return mapway;
 	}
 
-	/**
-	 * проверка прохождения
-	 */
-	public void setcheckPoint(IMapCheckPoint checkPoint) {
+		public void setcheckPoint(IMapCheckPoint checkPoint) {
 		this.checkPoint = checkPoint;
 	}
 
 	/**
-	 * поиск пути
+	 * way find
 	 */
 	public boolean findWay(int startx, int starty, int endx, int endy) {
 		isFinish = false;
@@ -51,24 +48,23 @@ public class MapWayFind {
 		backPoint.add(p);
 		WayPoint node;
 		while (nextPoint.size() > 0) {
-			// Берем первую потенциальную точку из списка.
+			// first potentially possible point
 
 			node = nextPoint.get(0);
 			nextPoint.remove(0);
 
-			// проверяем дошли ли мы до конца
+			// is it end or no
 
 			if (node.getX() == endx && node.getY() == endy) {
 
-				// создаем путь
+				// make way
 				makeWay(node);
 				isFinish = true;
 				break;
 			} else {
-				// Помечаем точку как просмотренную, что бы не уйти в вечный
-				// цикл
+				// the point is scan
 				node.setVisited(true);
-				// ставим все потенциально возможные точки
+				// potentially possible point
 				addNode(node, node.getX() + 1, node.getY(), endx, endy);
 				addNode(node, node.getX() - 1, node.getY(), endx, endy);
 				addNode(node, node.getX(), node.getY() + 1, endx, endy);
@@ -84,14 +80,14 @@ public class MapWayFind {
 	}
 
 	/**
-	 * Создание пути из отобранных точек
+	 * make way
 	 */
 
 	private void makeWay(WayPoint node) {
 		mapway.clear();
 		while (node.getPX() != -1) {
 			mapway.addPoint(new Point(node.getX(), node.getY()));
-			// ищем предыдущию
+			// previous point
 			for (WayPoint p : backPoint) {
 				if (p.getX() == node.getPX() && p.getY() == node.getPY()) {
 					node = p;
@@ -102,7 +98,7 @@ public class MapWayFind {
 	}
 
 	/**
-	 * добавляем возможную точку
+	 * add potentially possible point
 	 */
 
 	private void addNode(WayPoint node, int x, int y, int endx, int endy) {
@@ -111,26 +107,26 @@ public class MapWayFind {
 			WayPoint px = new WayPoint(x, y, node.getX(), node.getY(), cost, false);
 			WayPoint old = null;
 
-			// проверяем точку на уникальность (p-начало)
+			// is point unique or no (p-start)
 			for (WayPoint p : backPoint) {
 				if (p.getX() == px.getX() && p.getY() == px.getY()) {
 					old = p;
 					break;
 				}
 			}
-			// Точка уникальна, или стоимость новой точки меньше старой
+			// point is unique and  price of new point is under that old point
+			
 			if (old == null || old.getCost() > cost) {
 				backPoint.add(px);
 				int i = 0;
 				for (i = 0; i < nextPoint.size(); i++) {
-					// Ставим точку с меньшой стоимостью в приоритет обхода
-					// потенциальных точек.
+					// point with under price is priority
 					if (cost < nextPoint.get(i).getCost()) {
 						nextPoint.add(i, px);
 						break;
 					}
 				}
-				// если точка не была вставлена, ставим ее вконец
+				// if point isn't add, add it in the end
 				if (i >= nextPoint.size()) {
 					nextPoint.add(px);
 				}

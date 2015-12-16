@@ -1,6 +1,6 @@
 package Paint;
 /**
- * работа со спрайтом изображений
+ * sprite
  */
 
 import java.awt.Graphics;
@@ -10,12 +10,12 @@ import Base.Game;
 public class TileSprite extends Tile {
 
 	/**
-	 * размеры картинки на спрайте!
+	 * size of the sprite image
 	 */
 	private int width;
 	private int height;
 	/**
-	 * Отступ в изображении (координаты изображения на спрайте)
+	 * Indent by painting
 	 */
 
 	private int offsetX;
@@ -37,7 +37,7 @@ public class TileSprite extends Tile {
 	public void render(Graphics g) {
 		int isoX = X, isoY = Y;
 		if (Game.USE_ISO) {
-			// Расчет координат в изометрической проекции
+			//  Isometric projection
 			isoX = (X - Y);
 			isoY = (X + Y) / 2;
 		}
